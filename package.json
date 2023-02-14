@@ -1,0 +1,30 @@
+{
+  "name": "@nestjs/ajala",
+  "version": "0.0.1",
+  "description": "NestJS wrapper for axios for glade finance",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && tsc",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.glade.ng/engineering/glade-v2/services/packages/ajala-js.git"
+  },
+  "author": "Glade Developers",
+  "license": "MIT",
+  "dependencies": {
+    "@nestjs/axios": "^2.0.0",
+    "@nestjs/common": "^9.3.9",
+    "@types/node": "^18.13.0",
+    "dotenv": "^16.0.3",
+    "env-var": "^7.3.0",
+    "fs": "^0.0.1-security",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^4.1.2",
+    "rxjs": "^7.8.0",
+    "typescript": "^4.9.5"
+  }
+}
