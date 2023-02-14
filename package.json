@@ -11,9 +11,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.glade.ng/engineering/glade-v2/services/packages/ajala-js.git"
+    "url": "https://github.com/OctaconDeveloper/nestjs-ajala.git"
   },
-  "author": "Glade Developers",
+  "author": "Harrys Jil <kaakadev@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@nestjs/axios": "^2.0.0",
