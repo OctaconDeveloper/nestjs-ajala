@@ -1,2 +1,9 @@
-/covergae
-/node_modules
+node_modules
+.idea
+.env
+/build
+/build/
+/dist
+/package-lock.json
+/coverage
+coverage/
