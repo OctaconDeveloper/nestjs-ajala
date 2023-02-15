@@ -1,5 +1,5 @@
 {
-  "name": "@glade-nestjs/ajala",
+  "name": "@octacondeveloper/ajala",
   "version": "0.0.1",
   "description": "NestJS wrapper for axios for glade finance",
   "main": "dist/index.js",
