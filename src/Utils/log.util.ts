@@ -15,8 +15,6 @@ export class Log {
     public loggerConfig: any;
 
     constructor(public fileSystem: FileSystem) {
-        // this.logPath = "GLADE_LOG_PATH";
-        // this.logPath = "src"; 
         this.logPath = env.get('GLADE_LOG_PATH').asString() || 'logs'
         this.app = env.get('APP_NAME').asString() || 'Core'; //come from env
         this.env = env.get('APP_ENV').asString() || 'development'; //come from env
@@ -72,7 +70,7 @@ export class Log {
      * @returns string
      */
     private getFilePath(type: string): string {
-        return `${this.logPath}/${(this.app.replace(" ", "")).toLowerCase()}-ajala-glade-${type}.log`
+        return `${this.logPath}/${(this.app.replace(" ", "")).toLowerCase()}-${(new Date()).toISOString().split('T')[0]}-ajala-glade-${type}.log`
     }
 
 
