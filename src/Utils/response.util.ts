@@ -62,7 +62,7 @@ export default class Response {
                 'info'
             );
         } catch (exception: any) {
-            this.responseStatusCode = exception.response.status;
+            this.responseStatusCode = exception.response?.status || '400';
 
             if (axios.isAxiosError(exception)) {
                 this.responseBody = this.clientException(exception)
