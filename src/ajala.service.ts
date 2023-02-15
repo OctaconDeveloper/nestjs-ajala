@@ -26,7 +26,7 @@ export class AjalaService {
      * @param files 
      * @returns Promise<IResponse>
      */
-    async post(url: string, headers: Array<any> = [], body: any, proxy: boolean = false, options: any = null, files: Array<any[]>): Promise<any> {
+    async post(url: string, headers: any, body: any, proxy: boolean = false, options: any = null, files: Array<any[]>): Promise<any> {
         body = JSON.parse(JSON.stringify(body));
         files = JSON.parse(JSON.stringify(files));
         if(files && files.length > 0) { 
@@ -47,7 +47,7 @@ export class AjalaService {
      * @param options 
      * @returns Promise<IResponse>
      */
-    async put(url: string, headers: Array<any> = [], body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
+    async put(url: string, headers: any, body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
         return await this.processRequest('PUT', url, options, headers, body, proxy);
 
     }
@@ -62,7 +62,7 @@ export class AjalaService {
      * @param options 
      * @returns Promise<IResponse>
      */
-    public async get(url: string, headers: Array<any> = [], body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
+    public async get(url: string, headers: any, body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
         return await this.processRequest('GET', url, options, headers, body, proxy);
     }
 
@@ -77,7 +77,7 @@ export class AjalaService {
      * @param options 
      * @returns Promise<IResponse>
      */
-    async head(url: string, headers: Array<any> = [], body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
+    async head(url: string, headers: any, body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
         return await this.processRequest('HEAD', url, options, headers, body, proxy);
     }
 
@@ -91,7 +91,7 @@ export class AjalaService {
      * @param options 
      * @returns Promise<IResponse>
      */
-    async delete(url: string, headers: Array<any> = [], body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
+    async delete(url: string, headers: any, body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
         return await this.processRequest('DELETE', url, options, headers, body, proxy);
     }
 
@@ -105,7 +105,7 @@ export class AjalaService {
      * @param options 
      * @returns Promise<IResponse>
      */
-    async patch(url: string, headers: Array<any> = [], body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
+    async patch(url: string, headers: any, body?: any, proxy: boolean = false, options?: any): Promise<IResponse> {
         return await this.processRequest('PATCH', url, options, headers, body, proxy);
     }
 
