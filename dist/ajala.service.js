@@ -35,7 +35,7 @@ let AjalaService = class AjalaService {
      * @param files
      * @returns Promise<IResponse>
      */
-    async post(url, headers = [], body, proxy = false, options = null, files) {
+    async post(url, headers, body, proxy = false, options = null, files) {
         body = JSON.parse(JSON.stringify(body));
         files = JSON.parse(JSON.stringify(files));
         if (files && files.length > 0) {
@@ -54,7 +54,7 @@ let AjalaService = class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    async put(url, headers = [], body, proxy = false, options) {
+    async put(url, headers, body, proxy = false, options) {
         return await this.processRequest('PUT', url, options, headers, body, proxy);
     }
     /**
@@ -67,7 +67,7 @@ let AjalaService = class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    async get(url, headers = [], body, proxy = false, options) {
+    async get(url, headers, body, proxy = false, options) {
         return await this.processRequest('GET', url, options, headers, body, proxy);
     }
     /**
@@ -80,7 +80,7 @@ let AjalaService = class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    async head(url, headers = [], body, proxy = false, options) {
+    async head(url, headers, body, proxy = false, options) {
         return await this.processRequest('HEAD', url, options, headers, body, proxy);
     }
     /**
@@ -93,7 +93,7 @@ let AjalaService = class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    async delete(url, headers = [], body, proxy = false, options) {
+    async delete(url, headers, body, proxy = false, options) {
         return await this.processRequest('DELETE', url, options, headers, body, proxy);
     }
     /**
@@ -106,7 +106,7 @@ let AjalaService = class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    async patch(url, headers = [], body, proxy = false, options) {
+    async patch(url, headers, body, proxy = false, options) {
         return await this.processRequest('PATCH', url, options, headers, body, proxy);
     }
     /**

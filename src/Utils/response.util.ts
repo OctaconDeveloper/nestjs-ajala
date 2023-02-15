@@ -32,16 +32,10 @@ export default class Response {
      */
     async processRequest(IncomingRequest: AxiosRequestConfig, options?: any): Promise<IResponse> {
 
-        //Skip headers taht hold sensitive data;
-        this.logableHeaders = IncomingRequest.headers;
-        this.headersToSkip.forEach(header => {
-            delete this.logableHeaders[header]
-        })
-
         const url = new URL(IncomingRequest.url as string);
 
         this.requestBody = {
-            headers: this.logableHeaders,
+            headers: IncomingRequest.headers,
             method: IncomingRequest.method,
             body: IncomingRequest.data,
             url: {
@@ -74,7 +68,7 @@ export default class Response {
         return {
             "statusCode": this.responseStatusCode,
             "response": this.responseBody,
-            "request": this.requestBody,
+            "request": this.prepareLog(this.requestBody),
             "logRef": this.logRef
         };
     }
@@ -91,7 +85,7 @@ export default class Response {
             { "logRef": this.logRef, "statusCode": this.responseStatusCode, "response": exception.response?.data, "request": exception.response?.headers },
             'error'
         );
-        return { headers: this.requestBody, data: exception.response?.data, code: this.responseStatusCode }
+        return { headers: this.prepareLog(this.requestBody), data: exception.response?.data, code: this.responseStatusCode }
     }
 
     /**
@@ -105,7 +99,7 @@ export default class Response {
             { "logRef": this.logRef, "statusCode": this.responseStatusCode, "response": exception.response?.data, "request": exception.response?.headers },
             'error'
         );
-        return { headers: exception.response?.headers, data: exception.response?.data, code: exception.response?.status }
+        return { headers: this.prepareLog(this.requestBody), data: exception.response?.data, code: exception.response?.status }
     }
 
 
@@ -119,6 +113,18 @@ export default class Response {
             counter += 1;
         }
         return `${prefix}_${result}`;
+    }
+
+    private prepareLog(requestBody:any) {
+
+        const defaultHeaders = requestBody.headers;
+
+        this.logableHeaders = defaultHeaders
+        this.headersToSkip.forEach(header => {
+            delete this.logableHeaders[header]
+        })
+        requestBody.headers = this.logableHeaders
+        return requestBody
     }
 }
 
