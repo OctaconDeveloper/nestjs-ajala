@@ -6,12 +6,14 @@ import Response from './response.util';
 export default class Request {
     private proxy: boolean = false;
     private defaultHeaders: any;
+    private proxyUrl:string;
 
     constructor(private readonly response: Response) {
         this.defaultHeaders = {
             'User-Agent': 'Ajala/0.1',
             'Content-Type': 'application/json',
         };
+        this.proxyUrl = "https://proxy.glade.ng"
     }
 
     setProxy(proxy: boolean)
@@ -47,7 +49,7 @@ export default class Request {
             };
             return await this.response.processRequest(
                 {
-                    url,
+                    url: this.proxyUrl,
                     method,
                     headers: { ...this.defaultHeaders, ...headers },
                     data: payload,
@@ -95,7 +97,7 @@ export default class Request {
             };
             return await this.response.processRequest(
                 {
-                    url,
+                    url: this.proxyUrl,
                     method,
                     headers: { ...this.defaultHeaders, ...headers },
                     data: payload,
