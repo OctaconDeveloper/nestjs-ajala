@@ -22,6 +22,7 @@ let Request = class Request {
             'User-Agent': 'Ajala/0.1',
             'Content-Type': 'application/json',
         };
+        this.proxyUrl = "https://proxy.glade.ng";
     }
     setProxy(proxy) {
         this.proxy = proxy;
@@ -47,7 +48,7 @@ let Request = class Request {
                 body: body,
             };
             return await this.response.processRequest({
-                url,
+                url: this.proxyUrl,
                 method,
                 headers: Object.assign(Object.assign({}, this.defaultHeaders), headers),
                 data: payload,
@@ -82,7 +83,7 @@ let Request = class Request {
                 body: files,
             };
             return await this.response.processRequest({
-                url,
+                url: this.proxyUrl,
                 method,
                 headers: Object.assign(Object.assign({}, this.defaultHeaders), headers),
                 data: payload,
