@@ -4,6 +4,7 @@ export default class Request {
     private readonly response;
     private proxy;
     private defaultHeaders;
+    private proxyUrl;
     constructor(response: Response);
     setProxy(proxy: boolean): this;
     /**
