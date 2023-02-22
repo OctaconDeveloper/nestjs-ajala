@@ -26,14 +26,7 @@ export class AjalaService {
      * @param files 
      * @returns Promise<IResponse>
      */
-    async post(url: string, headers: any, body: any, proxy: boolean = false, options: any = null, files: Array<any[]>): Promise<any> {
-        body = JSON.parse(JSON.stringify(body));
-        files = JSON.parse(JSON.stringify(files));
-        if(files && files.length > 0) { 
-            let form = this.sortFile(body, files);
-            return this.processRequest('POST',url, options, headers, form, proxy, true)
-
-        }
+    async post(url: string, headers: any, body: any, proxy: boolean = false, options: any = null): Promise<any> {
         return this.processRequest('POST',url, options, headers, body, proxy)
     }
 
