@@ -16,7 +16,7 @@ export declare class AjalaService {
      * @param files
      * @returns Promise<IResponse>
      */
-    post(url: string, headers: any, body: any, proxy: boolean, options: any, files: Array<any[]>): Promise<any>;
+    post(url: string, headers: any, body: any, proxy?: boolean, options?: any): Promise<any>;
     /**
      * Handle PUT requests
      *
