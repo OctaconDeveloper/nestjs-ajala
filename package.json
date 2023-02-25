@@ -1,6 +1,6 @@
 {
   "name": "@octacondeveloper/ajala",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "NestJS wrapper for axios for glade finance",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
