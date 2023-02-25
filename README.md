@@ -7,7 +7,7 @@ An <a href="https://www.npmjs.com/package/axios" target="blank">axios</a> wrappe
 ## Installation
 
 ```bash
-$ npm i --save @glade/ajala
+$ npm i --save @octacondeveloper/ajala
 ```
 
 ## Quick Start
