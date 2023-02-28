@@ -70,7 +70,7 @@ export class Log {
      * @returns string
      */
     private getFilePath(type: string): string {
-        return `${this.logPath}/${(this.app.replace(" ", "")).toLowerCase()}-${(new Date()).toISOString().split('T')[0]}-ajala-glade-${type}.log`
+        return `${this.logPath}/${(this.app.replace(/ /g,"-")).toLowerCase()}-${this.env.toLowerCase()}-${(new Date()).toISOString().split('T')[0]}-ajala-glade-${type}.log`
     }
 
 
@@ -110,7 +110,8 @@ export class Log {
     format(level: string, record: any): string {
         //format
         // [ appname :: environment] ajalaRef day, time  Log level    data
-        return `[${this.app} :: ${this.env}] ${this.logRef} - ${(new Date()).toLocaleDateString()}, ${(new Date()).toLocaleTimeString()}  LOG[${level.toUpperCase()}] ${JSON.stringify(record)}`;
+        return `[${this.app.replace(/ /g,"-")} :: ${this.env.toLowerCase()}] ${this.logRef} - ${(new Date()).toLocaleDateString()}, ${(new Date()).toLocaleTimeString()}  LOG[${level.toUpperCase()}] ${JSON.stringify(record)}`;
+
     }
 }
 

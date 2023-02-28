@@ -47,7 +47,7 @@ export default class Response {
             }
         }
 
-         try {
+        try {
             const response = await axios(IncomingRequest);
             this.responseBody = { headers: response.headers, data: response.data, code: response.status }
             this.responseStatusCode = response.status;
@@ -67,7 +67,7 @@ export default class Response {
 
         return {
             "statusCode": this.responseStatusCode,
-            "response": this.responseBody,
+            "response": this.prepareLog(this.responseBody),
             "request": this.prepareLog(this.requestBody),
             "logRef": this.logRef
         };
@@ -81,11 +81,8 @@ export default class Response {
      * @returns 
      */
     private clientException(exception: any) {
-        this.logger.send(
-            { "logRef": this.logRef, "statusCode": this.responseStatusCode, "response": exception.response?.data, "request": exception.response?.headers },
-            'error'
-        );
-        return { headers: this.prepareLog(this.requestBody), data: exception.response?.data, code: this.responseStatusCode }
+        this.logger.send({ "logRef": this.logRef, "statusCode": this.responseStatusCode, "response": exception.response?.data, "request": this.requestBody }, 'error');
+        return { headers: exception.response.headers, body: exception.response?.data, code: this.responseStatusCode }
     }
 
     /**
@@ -94,12 +91,12 @@ export default class Response {
      * @param exception 
      * @returns 
      */
-    private requestException(exception:any) {
+    private requestException(exception: any) {
         this.logger.send(
-            { "logRef": this.logRef, "statusCode": this.responseStatusCode, "response": exception.response?.data, "request": exception.response?.headers },
+            { "logRef": this.logRef, "statusCode": this.responseStatusCode, "response": exception.response?.data, "request": this.requestBody },
             'error'
         );
-        return { headers: this.prepareLog(this.requestBody), data: exception.response?.data, code: exception.response?.status }
+        return { headers: exception.response.headers, body: exception.response?.data, code: this.responseStatusCode }
     }
 
 
@@ -115,7 +112,7 @@ export default class Response {
         return `${prefix}_${result}`;
     }
 
-    private prepareLog(requestBody:any) {
+    private prepareLog(requestBody: any) {
 
         const defaultHeaders = requestBody.headers;
 
