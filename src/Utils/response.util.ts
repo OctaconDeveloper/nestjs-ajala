@@ -32,12 +32,10 @@ export default class Response {
      */
     async processRequest(IncomingRequest: AxiosRequestConfig, options?: any): Promise<IResponse> {
 
-        //Skip headers taht hold sensitive data;
-    
         const url = new URL(IncomingRequest.url as string);
 
         this.requestBody = {
-            headers: this.logableHeaders,
+            headers: IncomingRequest.headers,
             method: IncomingRequest.method,
             body: IncomingRequest.data,
             url: {
@@ -49,7 +47,7 @@ export default class Response {
             }
         }
 
-         try {
+        try {
             const response = await axios(IncomingRequest);
             this.responseBody = { headers: response.headers, data: response.data, code: response.status }
             this.responseStatusCode = response.status;
@@ -93,7 +91,7 @@ export default class Response {
      * @param exception 
      * @returns 
      */
-    private requestException(exception:any) {
+    private requestException(exception: any) {
         this.logger.send(
             { "logRef": this.logRef, "statusCode": this.responseStatusCode, "response": exception.response?.data, "request": this.requestBody },
             'error'
@@ -115,10 +113,12 @@ export default class Response {
     }
 
     private prepareLog(requestBody: any) {
+
         const defaultHeaders = requestBody.headers;
+
         this.logableHeaders = defaultHeaders
         this.headersToSkip.forEach(header => {
-            this.logableHeaders[header] = "REDACTED"
+            delete this.logableHeaders[header]
         })
         requestBody.headers = this.logableHeaders
         return requestBody

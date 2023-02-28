@@ -33,5 +33,6 @@ export default class Response {
      */
     private requestException;
     private createReference;
+    private prepareLog;
 }
 //# sourceMappingURL=response.util.d.ts.map

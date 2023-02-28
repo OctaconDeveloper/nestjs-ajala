@@ -34,14 +34,9 @@ let Response = class Response {
      */
     async processRequest(IncomingRequest, options) {
         var _a;
-        //Skip headers taht hold sensitive data;
-        this.logableHeaders = IncomingRequest.headers;
-        this.headersToSkip.forEach(header => {
-            delete this.logableHeaders[header];
-        });
         const url = new URL(IncomingRequest.url);
         this.requestBody = {
-            headers: this.logableHeaders,
+            headers: IncomingRequest.headers,
             method: IncomingRequest.method,
             body: IncomingRequest.data,
             url: {
@@ -68,7 +63,7 @@ let Response = class Response {
         return {
             "statusCode": this.responseStatusCode,
             "response": this.responseBody,
-            "request": this.requestBody,
+            "request": this.prepareLog(this.requestBody),
             "logRef": this.logRef
         };
     }
@@ -81,7 +76,7 @@ let Response = class Response {
     clientException(exception) {
         var _a, _b, _c;
         this.logger.send({ "logRef": this.logRef, "statusCode": this.responseStatusCode, "response": (_a = exception.response) === null || _a === void 0 ? void 0 : _a.data, "request": (_b = exception.response) === null || _b === void 0 ? void 0 : _b.headers }, 'error');
-        return { headers: this.requestBody, data: (_c = exception.response) === null || _c === void 0 ? void 0 : _c.data, code: this.responseStatusCode };
+        return { headers: this.prepareLog(this.requestBody), data: (_c = exception.response) === null || _c === void 0 ? void 0 : _c.data, code: this.responseStatusCode };
     }
     /**
      * Logs request errors that are not axios related
@@ -90,9 +85,9 @@ let Response = class Response {
      * @returns
      */
     requestException(exception) {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d;
         this.logger.send({ "logRef": this.logRef, "statusCode": this.responseStatusCode, "response": (_a = exception.response) === null || _a === void 0 ? void 0 : _a.data, "request": (_b = exception.response) === null || _b === void 0 ? void 0 : _b.headers }, 'error');
-        return { headers: (_c = exception.response) === null || _c === void 0 ? void 0 : _c.headers, data: (_d = exception.response) === null || _d === void 0 ? void 0 : _d.data, code: (_e = exception.response) === null || _e === void 0 ? void 0 : _e.status };
+        return { headers: this.prepareLog(this.requestBody), data: (_c = exception.response) === null || _c === void 0 ? void 0 : _c.data, code: (_d = exception.response) === null || _d === void 0 ? void 0 : _d.status };
     }
     createReference(prefix, length) {
         let result = '';
@@ -104,6 +99,15 @@ let Response = class Response {
             counter += 1;
         }
         return `${prefix}_${result}`;
+    }
+    prepareLog(requestBody) {
+        const defaultHeaders = requestBody.headers;
+        this.logableHeaders = defaultHeaders;
+        this.headersToSkip.forEach(header => {
+            delete this.logableHeaders[header];
+        });
+        requestBody.headers = this.logableHeaders;
+        return requestBody;
     }
 };
 Response = __decorate([

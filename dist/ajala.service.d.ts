@@ -16,7 +16,7 @@ export declare class AjalaService {
      * @param files
      * @returns Promise<IResponse>
      */
-    post(url: string, headers: Array<any>, body: any, proxy: boolean, options: any, files: Array<any[]>): Promise<any>;
+    post(url: string, headers: any, body: any, proxy?: boolean, options?: any): Promise<any>;
     /**
      * Handle PUT requests
      *
@@ -27,7 +27,7 @@ export declare class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    put(url: string, headers?: Array<any>, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
+    put(url: string, headers: any, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
     /**
      * Handle GET requests
      *
@@ -38,7 +38,7 @@ export declare class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    get(url: string, headers?: Array<any>, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
+    get(url: string, headers: any, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
     /**
      * Handle HEAD requests
      *
@@ -49,7 +49,7 @@ export declare class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    head(url: string, headers?: Array<any>, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
+    head(url: string, headers: any, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
     /**
      * Handle DELETE requests
      *
@@ -60,7 +60,7 @@ export declare class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    delete(url: string, headers?: Array<any>, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
+    delete(url: string, headers: any, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
     /**
      * Handle PATCH requests
      *
@@ -71,7 +71,7 @@ export declare class AjalaService {
      * @param options
      * @returns Promise<IResponse>
      */
-    patch(url: string, headers?: Array<any>, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
+    patch(url: string, headers: any, body?: any, proxy?: boolean, options?: any): Promise<IResponse>;
     /**
      * Process requests
      *
